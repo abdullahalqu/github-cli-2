@@ -1,0 +1,27 @@
+name: Depending Jobs
+
+on:
+  push:
+    branches:
+      - main
+
+
+env: 
+  ACTOR: ${{github.actor}}
+
+jobs:
+  job1:  
+    runs-on: ubuntu-latest
+    outputs:
+      job1_output: ${{ steps.step1.outputs.name }}
+    steps:
+      - id: step1  
+        run: echo "name=$ACTOR" >> "$GITHUB_OUTPUT"
+  job2_talk:
+    needs: job1 
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          ob_output: ${{needs.job1.outputs.job1_output}}
+        run: echo "$job_output"
+  
