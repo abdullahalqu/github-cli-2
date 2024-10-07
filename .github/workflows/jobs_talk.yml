@@ -1,0 +1,19 @@
+name: Jobs Talk
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  job1_talk:  
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hi i am job1 nice to meet u"
+  job2_talk:
+    needs: job1_talk 
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "hi i am job2 nice to meet u
+  
